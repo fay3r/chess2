@@ -13,7 +13,7 @@ interface RulesOfGame {
 
         @Override
         public boolean isCorrectMove(Point source, Point destination) {
-            if(source.getX() == destination.getX() && source.getY() == destination.getY()) {
+            if (source.getX() == destination.getX() && source.getY() == destination.getY()) {
                 return false;
             }
 
@@ -34,4 +34,64 @@ interface RulesOfGame {
     // TODO: Prosze dokonczyc implementacje kolejnych figur szachowych: Knight, King, Queen, Rook, Pawn
     // TODO: Prosze stosowac zaproponowane nazwy klas !!!
     // TODO: Kazda klasa powinna implementowac interfejs RulesOfGame
+
+    class Rook implements RulesOfGame {
+
+        @Override
+        public boolean isCorrectMove(Point source, Point destination) {
+            if (source.getX() == destination.getX() && source.getY() == destination.getY()) {
+                return false;
+            } else if (source.getX() == destination.getX() || source.getY() == destination.getY()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    class King implements RulesOfGame {
+
+        @Override
+        public boolean isCorrectMove(Point source, Point destination) {
+            if (source.getX() == destination.getX() && source.getY() == destination.getY()) {
+                return false;
+            } else if (Math.abs(source.getX() - destination.getX()) == 1 || Math.abs(source.getY() - destination.getY()) == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    class Queen implements RulesOfGame {
+
+        @Override
+        public boolean isCorrectMove(Point source, Point destination) {
+            if (source.getX() == destination.getX() && source.getY() == destination.getY()) {
+                return false;
+            } else if (source.getX() == destination.getX() || source.getY() == destination.getY()) {
+                return true;
+            } else if (Math.abs(destination.getX() - source.getX()) ==
+                    Math.abs(destination.getY() - source.getY())) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
+    class Pawn implements RulesOfGame {
+
+        @Override
+        public boolean isCorrectMove(Point source, Point destination) {
+            if (source.getX() == destination.getX() && source.getY() == destination.getY()) {
+                return false;
+            } else if (source.getX() - destination.getX() == -1 && source.getY() == destination.getY()) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+    }
+
 }
