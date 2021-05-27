@@ -26,8 +26,16 @@ interface RulesOfGame {
 
         @Override
         public boolean isCorrectMove(Point source, Point destination) {
-            // TODO: Prosze dokonczyc implementacje
-            return true;
+            int newX = destination.getX(), newY = destination.getY();
+            int srcX = source.getX(), srcY = source.getY();
+            System.out.println(Math.abs(newX - srcX) * Math.abs(newY - srcY));
+            if (srcX == newX && srcY == newY) {
+                return false;
+            } else if (Math.abs(newX - srcX) * Math.abs(newY - srcY) == 2) {
+                return true;
+            } else {
+                return false;
+            }
         }
     }
 
@@ -55,7 +63,12 @@ interface RulesOfGame {
         public boolean isCorrectMove(Point source, Point destination) {
             if (source.getX() == destination.getX() && source.getY() == destination.getY()) {
                 return false;
-            } else if (Math.abs(source.getX() - destination.getX()) == 1 || Math.abs(source.getY() - destination.getY()) == 1) {
+            } else if ((Math.abs(source.getX() - destination.getX()) == 1 ||
+                    Math.abs(source.getX() - destination.getX()) == 0 ||
+                    Math.abs(source.getX() - destination.getX()) == -1)
+                    && (Math.abs(source.getY() - destination.getY()) == 1 ||
+                    Math.abs(source.getY() - destination.getY()) == 0 ||
+                    Math.abs(source.getY() - destination.getY()) == -1)) {
                 return true;
             } else {
                 return false;

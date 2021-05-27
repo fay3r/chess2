@@ -9,7 +9,8 @@ public class ChessConfiguration {
     @Bean
     ChessFacade filmFacade() {
         MoveConverter moveConverter = new MoveConverter();
+        ClassProvider classProvider = new ClassProvider();
 
-        return new ChessFacade(moveConverter);
+        return new ChessFacade(moveConverter, classProvider);
     }
 }

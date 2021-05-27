@@ -13,10 +13,11 @@ public class ChessFacade {
     private RulesOfGame pawn;
     private RulesOfGame rook;
     private MoveConverter moveConverter;
-    // ...
+    private ClassProvider classProvider;
 
-    public ChessFacade(MoveConverter moveConverter) {
+    public ChessFacade(MoveConverter moveConverter, ClassProvider classProvider) {
         this.moveConverter =moveConverter;
+        this.classProvider = classProvider;
         bishop = new RulesOfGame.Bishop();
         knight = new RulesOfGame.Knight();
         king = new RulesOfGame.King();
@@ -29,23 +30,6 @@ public class ChessFacade {
     public boolean isCorrectMove(FigureMoveDto figureMoveDto) {
 
         FigureMove figureMove = moveConverter.toFigureMove(figureMoveDto);
-        switch (figureMove.getType()) {
-            case BISHOP:
-                // wywolaj konwerter punktow oraz popraw ponizszy kod
-                return bishop.isCorrectMove(figureMove.getSource(), figureMove.getDestination());
-            case KNIGHT:
-                // wywolaj konwerter punktow oraz popraw ponizszy kod
-                return knight.isCorrectMove(figureMove.getSource(), figureMove.getDestination());
-            case KING:
-                return king.isCorrectMove(figureMove.getSource(),figureMove.getDestination());
-            case PAWN:
-                return pawn.isCorrectMove(figureMove.getSource(),figureMove.getDestination());
-            case ROCK:
-                return rook.isCorrectMove(figureMove.getSource(),figureMove.getDestination());
-            case QUEEN:
-                return queen.isCorrectMove(figureMove.getSource(),figureMove.getDestination());
-        }
-
-        return false;
+        return classProvider.provide(figureMoveDto.getType()).isCorrectMove(figureMove.getSource(),figureMove.getDestination());
     }
 }
